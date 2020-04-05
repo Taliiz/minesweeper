@@ -1,0 +1,5 @@
+for each row in the grid: 
+    for each square in each row: 
+        map(item => {
+            let 
+        })

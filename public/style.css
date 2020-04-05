@@ -1,0 +1,50 @@
+body {
+    background-color: #36393e;
+}
+
+.blueButton {
+    border: 1px outset blue;
+    background-color: lightBlue;
+    height: 50px;
+    width: 50px;
+    margin: 0 auto;
+}
+
+.redButton {
+    border: 1px outset red;
+    background-color: pink;
+    height: 50px;
+    width: 50px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+.yellow-square {
+    background-color: #ffdc00;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+#width,
+#height,
+#numberOfMines {
+    display: inline-block;
+}
+
+label {
+    color: white;
+}
+
+input {
+    width: 30px;
+}
