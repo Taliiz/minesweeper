@@ -11,7 +11,7 @@ function Square(props) {
 
     return (
         <button className={color} onClick={handleClick}>
-            aha
+            {props.data.value}
         </button>
     );
 }

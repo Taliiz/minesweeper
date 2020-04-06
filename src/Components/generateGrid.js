@@ -1,3 +1,6 @@
+import React from "react";
+import Emoji from "./Emoji";
+
 function generateGrid(height, width, mines) {
     let minesToPlace = mines;
 
@@ -9,8 +12,8 @@ function generateGrid(height, width, mines) {
     for (let i = 0; i < height + 2; i++) {
         for (let j = 0; j < width + 2; j++) {
             grid[i][j] = {
-                value: null,
-                isMine: null
+                value: 0,
+                isMine: false
             };
         }
     }
@@ -20,6 +23,7 @@ function generateGrid(height, width, mines) {
         let randomWidth = Math.floor(Math.random() * width) + 1;
         if (!grid[randomHeight][randomWidth].isMine) {
             grid[randomHeight][randomWidth].isMine = true;
+            grid[randomHeight][randomWidth.value] = <Emoji symbol="💣" />;
         }
         minesToPlace--;
     }
@@ -48,6 +52,7 @@ function generateGrid(height, width, mines) {
             }
         }
     }
+
     grid.shift();
     grid.pop();
     let finalgrid = grid.map(row => {
@@ -55,6 +60,17 @@ function generateGrid(height, width, mines) {
         row.pop();
         return row;
     });
+
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+            finalgrid[i][j] = {
+                ...finalgrid[i][j],
+                rowInd: i,
+                colInd: j
+            };
+        }
+    }
+
     return finalgrid;
 }
 

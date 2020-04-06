@@ -2,50 +2,56 @@ import React, { useState } from "react";
 import Grid from "./generateGrid";
 
 function Game() {
-    const [width, setWidth] = useState(null);
-    const [height, setHeight] = useState(null);
-    const [mines, setMines] = useState(null);
-    let generated = { display: "none" };
+    const [gridData, setData] = useState({
+        height: 16,
+        width: 30,
+        mines: 99
+    });
 
-    function handleWidth(event) {
-        setWidth(event.target.value);
-    }
-
-    function handleHeight(event) {
-        setHeight(event.target.value);
-    }
-
-    function handleMines(event) {
-        setMines(event.target.value);
-    }
-
-    function handleGen(event) {
-        event.preventDefault();
-        generated = null;
+    function handleChange(event) {
+        setData(event.target.value);
     }
 
     return (
         <div>
             <form style={{ textAlign: "center" }}>
-                <label>Grid Height: </label>
-                <input
-                    type="text"
-                    value={height}
-                    onChange={handleHeight}
-                ></input>
-                <label> Grid Width: </label>
-                <input type="text" value={width} onChange={handleWidth}></input>
-                <label> Mine Amount: </label>
-                <input type="text" value={mines} onChange={handleMines}></input>
-                <button onClick={handleGen} style={{ margin: "10px" }}>
-                    Generate Grid
-                </button>
+                <label>Select Difficulty</label>
+                <br />
+                <select value={gridData} onChange={handleChange}>
+                    <option
+                        value={{
+                            height: 9,
+                            width: 9,
+                            mines: 10
+                        }}
+                    >
+                        Beginner
+                    </option>
+                    <option
+                        value={{
+                            height: 16,
+                            width: 16,
+                            mines: 40
+                        }}
+                    >
+                        Intermediate
+                    </option>
+                    <option
+                        value={{
+                            height: 16,
+                            width: 30,
+                            mines: 99
+                        }}
+                    >
+                        Expert
+                    </option>
+                </select>
             </form>
+            <h1>{gridData.mines}</h1>
             <Grid
-                height={height}
-                width={width}
-                mines={mines}
-                style={{ generated }}
+                height={gridData.height}
+                width={gridData.width}
+                mines={gridData.mines}
             />
         </div>
     );
