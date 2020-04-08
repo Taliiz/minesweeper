@@ -23,7 +23,7 @@ function generateGrid(height, width, mines) {
         let randomWidth = Math.floor(Math.random() * width) + 1;
         if (!grid[randomHeight][randomWidth].isMine) {
             grid[randomHeight][randomWidth].isMine = true;
-            grid[randomHeight][randomWidth.value] = <Emoji symbol="💣" />;
+            grid[randomHeight][randomWidth].value = <Emoji symbol="💣" />;
         }
         minesToPlace--;
     }

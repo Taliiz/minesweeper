@@ -5,16 +5,16 @@ body {
 .blueButton {
     border: 1px outset blue;
     background-color: lightBlue;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     margin: 0 auto;
 }
 
 .redButton {
     border: 1px outset red;
     background-color: pink;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     margin: 0 auto;
 }
 
@@ -47,4 +47,8 @@ label {
 
 input {
     width: 30px;
+}
+
+.inlineForm {
+    display: inline;
 }
