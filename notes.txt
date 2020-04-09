@@ -1,5 +1,6 @@
-for each row in the grid: 
-    for each square in each row: 
-        map(item => {
-            let 
-        })
+problem : can't change custom values
+cause: values are hard coded and can't be changed 
+solution(s): change the array with new data from inputs, 
+             scrap the array and go about it otherwise
+
+trial: scrapping the array 

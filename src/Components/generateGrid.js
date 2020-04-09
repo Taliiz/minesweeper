@@ -66,7 +66,9 @@ function generateGrid(height, width, mines) {
             finalgrid[i][j] = {
                 ...finalgrid[i][j],
                 rowInd: i,
-                colInd: j
+                colInd: j,
+                isRevealed: false,
+                isMarked: false
             };
         }
     }

@@ -18,9 +18,9 @@ const difficulties = [
         sentence: "That's more like it!"
     },
     {
-        height: "",
-        width: "",
-        mines: ""
+        height: 1,
+        width: 1,
+        mines: 1
     }
 ];
 

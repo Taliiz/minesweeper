@@ -4,17 +4,27 @@ import Grid from "./Grid";
 
 function Game() {
     const [difficulty, setDiff] = useState("0");
+    const [customWidth, setCustomWidth] = useState(null);
+    const [customHeight, setCustomHeight] = useState(null);
+    const [customMines, setCustomMines] = useState(null);
+    const [height, setHeight] = useState(1);
+    const [width, setWidth] = useState(1);
+    const [mines, setMines] = useState(1);
 
-    let isCustom = difficulty === "3" ? true : "none";
+    let isCustom = difficulty === "3" ? null : "none";
 
-    let height = difficulties[difficulty].height;
-    let width = difficulties[difficulty].width;
-    let mines = difficulties[difficulty].mines;
+    if (difficulty < 3) {
+        setHeight(difficulties[difficulty].height);
+        setWidth(difficulties[difficulty].width);
+        setMines(difficulties[difficulty].mines);
+    }
 
-    function handleGen() {
-        height = difficulties[difficulty].height;
-        width = difficulties[difficulty].width;
-        mines = difficulties[difficulty].mines;
+    function handleGen(event) {
+        event.preventDefault();
+        setHeight(customHeight);
+        setWidth(customWidth);
+        setMines(customMines);
+        console.log("does this shit button work?");
     }
 
     return (
@@ -36,26 +46,29 @@ function Game() {
                 <label>Grid Height: </label>
                 <input
                     type="text"
-                    value={difficulties[3].height}
-                    onChange={e => (difficulties[3].height = e.target.value)}
+                    value={customHeight}
+                    onChange={e => setCustomHeight(e.target.value)}
                 ></input>
                 <label> Grid Width: </label>
                 <input
                     type="text"
-                    value={difficulties[3].width}
-                    onChange={e => (difficulties[3].width = e.target.value)}
+                    value={customWidth}
+                    onChange={e => setCustomWidth(e.target.value)}
                 ></input>
                 <label> Mines: </label>
                 <input
                     type="text"
-                    value={difficulties[3].mines}
-                    onChange={e => (difficulties[3].mines = e.target.value)}
+                    value={customMines}
+                    onChange={e => setCustomMines(e.target.value)}
                 ></input>
                 <button onClick={handleGen} style={{ margin: "10px" }}>
                     Generate Grid
                 </button>
             </form>
             <Grid height={height} width={width} mines={mines} />
+            <h1>
+                Height: {height}, custom height: {customHeight}
+            </h1>
         </div>
     );
 }
