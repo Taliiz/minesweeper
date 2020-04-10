@@ -7,16 +7,18 @@ function Game() {
     const [customWidth, setCustomWidth] = useState(null);
     const [customHeight, setCustomHeight] = useState(null);
     const [customMines, setCustomMines] = useState(null);
-    const [height, setHeight] = useState(1);
-    const [width, setWidth] = useState(1);
-    const [mines, setMines] = useState(1);
+    const [height, setHeight] = useState(9);
+    const [width, setWidth] = useState(9);
+    const [mines, setMines] = useState(10);
 
     let isCustom = difficulty === "3" ? null : "none";
 
-    if (difficulty < 3) {
-        setHeight(difficulties[difficulty].height);
-        setWidth(difficulties[difficulty].width);
-        setMines(difficulties[difficulty].mines);
+    function handleSelect(event) {
+        const value = event.target.value;
+        setDiff(value);
+        setHeight(difficulties[value].height);
+        setWidth(difficulties[value].width);
+        setMines(difficulties[value].mines);
     }
 
     function handleGen(event) {
@@ -24,17 +26,13 @@ function Game() {
         setHeight(customHeight);
         setWidth(customWidth);
         setMines(customMines);
-        console.log("does this shit button work?");
     }
 
     return (
         <div style={{ textAlign: "center" }}>
             <label>Select Difficulty</label>
             <br />
-            <select
-                value={difficulty}
-                onChange={e => setDiff(e.currentTarget.value)}
-            >
+            <select value={difficulty} onChange={handleSelect}>
                 <option value="0">Beginner</option>
                 <option value="1">Intermediate</option>
                 <option value="2">Expert</option>
