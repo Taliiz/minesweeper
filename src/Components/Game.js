@@ -12,13 +12,14 @@ function Game() {
     const [mines, setMines] = useState(10);
 
     let isCustom = difficulty === "3" ? null : "none";
+    let diffArray = difficulties;
 
     function handleSelect(event) {
         const value = event.target.value;
         setDiff(value);
-        setHeight(difficulties[value].height);
-        setWidth(difficulties[value].width);
-        setMines(difficulties[value].mines);
+        setHeight(diffArray[value].height);
+        setWidth(diffArray[value].width);
+        setMines(diffArray[value].mines);
     }
 
     function handleGen(event) {
@@ -38,7 +39,6 @@ function Game() {
                 <option value="2">Expert</option>
                 <option value="3">Custom</option>
             </select>
-            <h1>{difficulties[difficulty].sentence}</h1>
 
             <form style={{ display: isCustom }}>
                 <label>Grid Height: </label>
@@ -47,25 +47,34 @@ function Game() {
                     value={customHeight}
                     onChange={e => setCustomHeight(e.target.value)}
                 ></input>
+
                 <label> Grid Width: </label>
                 <input
                     type="text"
                     value={customWidth}
                     onChange={e => setCustomWidth(e.target.value)}
                 ></input>
+
                 <label> Mines: </label>
                 <input
                     type="text"
                     value={customMines}
                     onChange={e => setCustomMines(e.target.value)}
                 ></input>
+
                 <button onClick={handleGen} style={{ margin: "10px" }}>
                     Generate Grid
                 </button>
             </form>
+
             <Grid height={height} width={width} mines={mines} />
+
             <h1>
                 Height: {height}, custom height: {customHeight}
+                <br></br>
+                Width: {width}, custom width: {customWidth}
+                <br></br>
+                Mines: {mines}, custom mines: {customMines}
             </h1>
         </div>
     );
