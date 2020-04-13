@@ -2,13 +2,11 @@ import React from "react";
 
 function Square(props) {
     const data = props.data;
+    console.log(data.isRevealed);
 
     return (
-        <button
-            className={data.isRevealed ? "revealed" : "notRevealed"}
-            onClick={props.function}
-        >
-            {data.isRevealed ? data.value : null}
+        <button className="revealed" onClick={(e) => props.function(e, data)}>
+            {data.value}
         </button>
     );
 }
