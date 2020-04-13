@@ -2,17 +2,17 @@ body {
     background-color: #36393e;
 }
 
-.blueButton {
-    border: 1px outset blue;
-    background-color: lightBlue;
+.revealed {
+    border: 1px outset #840424;
+    background-color: #cc342c;
     height: 40px;
     width: 40px;
     margin: 0 auto;
 }
 
-.redButton {
-    border: 1px outset red;
-    background-color: pink;
+.notRevealed {
+    border: 1px outset #840424;
+    background-color: #a41424;
     height: 40px;
     width: 40px;
     margin: 0 auto;
@@ -46,7 +46,7 @@ label {
 }
 
 input {
-    width: 30px;
+    width: 40px;
 }
 
 .inlineForm {

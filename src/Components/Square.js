@@ -1,17 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
 function Square(props) {
-    const [isClicked, changeSquare] = useState(false);
-
-    function handleClick() {
-        changeSquare(prevState => !prevState);
-    }
-
-    const color = isClicked ? "redButton" : "blueButton";
+    const data = props.data;
 
     return (
-        <button className={color} onClick={handleClick}>
-            {props.data.value}
+        <button
+            className={data.isRevealed ? "revealed" : "notRevealed"}
+            onClick={props.function}
+        >
+            {data.isRevealed ? data.value : null}
         </button>
     );
 }

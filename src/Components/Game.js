@@ -1,32 +1,42 @@
 import React, { useState } from "react";
 import difficulties from "./constantVariables/difficulty";
 import Grid from "./Grid";
+import generateGrid from "./generateGrid";
+import squareLogic from "./functions/squareLogic";
 
 function Game() {
     const [difficulty, setDiff] = useState("0");
     const [customWidth, setCustomWidth] = useState(null);
     const [customHeight, setCustomHeight] = useState(null);
     const [customMines, setCustomMines] = useState(null);
-    const [height, setHeight] = useState(9);
-    const [width, setWidth] = useState(9);
-    const [mines, setMines] = useState(10);
+    const [dataArr, setData] = useState(generateGrid(9, 9, 10));
+    const [number, setNumber] = useState(0);
 
-    let isCustom = difficulty === "3" ? null : "none";
+    let isCustom = difficulty === 3 ? null : "none";
     let diffArray = difficulties;
 
     function handleSelect(event) {
-        const value = event.target.value;
+        const value = parseInt(event.target.value);
         setDiff(value);
-        setHeight(diffArray[value].height);
-        setWidth(diffArray[value].width);
-        setMines(diffArray[value].mines);
+        if (parseInt(value) < 3) {
+            setData(
+                generateGrid(
+                    diffArray[value].height,
+                    diffArray[value].width,
+                    diffArray[value].mines
+                )
+            );
+        }
+        setNumber((prevNumber) => prevNumber + 1);
     }
 
     function handleGen(event) {
         event.preventDefault();
-        setHeight(customHeight);
-        setWidth(customWidth);
-        setMines(customMines);
+        setData(generateGrid(customHeight, customWidth, customMines));
+    }
+
+    function handleSquare(e, data) {
+        setData(squareLogic(e, data, dataArr));
     }
 
     return (
@@ -43,23 +53,23 @@ function Game() {
             <form style={{ display: isCustom }}>
                 <label>Grid Height: </label>
                 <input
-                    type="text"
+                    type="number"
                     value={customHeight}
-                    onChange={e => setCustomHeight(e.target.value)}
+                    onChange={(e) => setCustomHeight(parseInt(e.target.value))}
                 ></input>
 
                 <label> Grid Width: </label>
                 <input
-                    type="text"
+                    type="number"
                     value={customWidth}
-                    onChange={e => setCustomWidth(e.target.value)}
+                    onChange={(e) => setCustomWidth(parseInt(e.target.value))}
                 ></input>
 
                 <label> Mines: </label>
                 <input
-                    type="text"
+                    type="number"
                     value={customMines}
-                    onChange={e => setCustomMines(e.target.value)}
+                    onChange={(e) => setCustomMines(parseInt(e.target.value))}
                 ></input>
 
                 <button onClick={handleGen} style={{ margin: "10px" }}>
@@ -67,15 +77,8 @@ function Game() {
                 </button>
             </form>
 
-            <Grid height={height} width={width} mines={mines} />
-
-            <h1>
-                Height: {height}, custom height: {customHeight}
-                <br></br>
-                Width: {width}, custom width: {customWidth}
-                <br></br>
-                Mines: {mines}, custom mines: {customMines}
-            </h1>
+            <Grid data={dataArr} function={handleSquare} />
+            <h1>{number}</h1>
         </div>
     );
 }

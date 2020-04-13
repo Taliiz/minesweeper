@@ -1,6 +1,3 @@
-problem : can't change custom values
-cause: values are hard coded and can't be changed 
-solution(s): change the array with new data from inputs, 
-             scrap the array and go about it otherwise
-
-trial: scrapping the array 
+make a grid with default values on setup 
+update grid array when difficulty is changed 
+pass grid array as data prop in grid element 
