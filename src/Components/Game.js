@@ -10,15 +10,15 @@ function Game() {
     const [customHeight, setCustomHeight] = useState(null);
     const [customMines, setCustomMines] = useState(null);
     const [dataArr, setData] = useState(generateGrid(9, 9, 10));
-    const [number, setNumber] = useState(0);
 
     let isCustom = difficulty === 3 ? null : "none";
     let diffArray = difficulties;
 
     function handleSelect(event) {
+        setDiff(event.target.value);
         const value = parseInt(event.target.value);
-        setDiff(value);
-        if (parseInt(value) < 3) {
+
+        if (value < 3) {
             setData(
                 generateGrid(
                     diffArray[value].height,
@@ -27,7 +27,6 @@ function Game() {
                 )
             );
         }
-        setNumber((prevNumber) => prevNumber + 1);
     }
 
     function handleGen(event) {
@@ -37,6 +36,19 @@ function Game() {
 
     function handleSquare(e, data) {
         setData(squareLogic(e, data, dataArr));
+    }
+
+    function reset(e) {
+        e.preventDefault();
+        if (difficulty === "0") {
+            setData(generateGrid(9, 9, 10));
+        } else if (difficulty === "1") {
+            setData(generateGrid(16, 16, 40));
+        } else if (difficulty === "2") {
+            setData(generateGrid(16, 30, 99));
+        } else {
+            setData(generateGrid(customHeight, customWidth, customMines));
+        }
     }
 
     return (
@@ -76,9 +88,9 @@ function Game() {
                     Generate Grid
                 </button>
             </form>
-
+            <br />
+            <button onClick={reset}>Reset</button>
             <Grid data={dataArr} function={handleSquare} />
-            <h1>{number}</h1>
         </div>
     );
 }

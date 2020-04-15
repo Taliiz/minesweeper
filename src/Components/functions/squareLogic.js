@@ -1,16 +1,16 @@
 function squareLogic(event, square, array) {
     const rowInd = square.rowInd;
     const colInd = square.colInd;
+    const finalArr = [...array];
 
-    if (event.type === "click") {
-        square.isRevealed = !square.isRevealed;
+    if (!square.isRevealed) {
+        if (event.type === "click") {
+            square.isRevealed = !square.isRevealed;
+        }
     }
 
-    square.value++;
-    console.log(square.value);
-
-    array[rowInd][colInd] = square;
-    return array;
+    finalArr[rowInd][colInd] = square;
+    return finalArr;
 }
 
 export default squareLogic;

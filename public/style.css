@@ -4,7 +4,7 @@ body {
 
 .revealed {
     border: 1px outset #840424;
-    background-color: #cc342c;
+    background-color: #ffcccb;
     height: 40px;
     width: 40px;
     margin: 0 auto;
@@ -12,7 +12,7 @@ body {
 
 .notRevealed {
     border: 1px outset #840424;
-    background-color: #a41424;
+    background-color: #cc342c;
     height: 40px;
     width: 40px;
     margin: 0 auto;
