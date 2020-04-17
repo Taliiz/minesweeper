@@ -11,13 +11,13 @@ function Game() {
     const [customMines, setCustomMines] = useState(null);
     const [dataArr, setData] = useState(generateGrid(9, 9, 10));
 
-    let isCustom = difficulty === 3 ? null : "none";
+    let isCustom = difficulty === "3" ? null : "none";
     let diffArray = difficulties;
 
     function handleSelect(event) {
         setDiff(event.target.value);
         const value = parseInt(event.target.value);
-
+        console.log(typeof difficulty);
         if (value < 3) {
             setData(
                 generateGrid(
@@ -47,7 +47,9 @@ function Game() {
         } else if (difficulty === "2") {
             setData(generateGrid(16, 30, 99));
         } else {
-            setData(generateGrid(customHeight, customWidth, customMines));
+            if (customHeight && customWidth && customMines) {
+                setData(generateGrid(customHeight, customWidth, customMines));
+            }
         }
     }
 
