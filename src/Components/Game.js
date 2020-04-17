@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import difficulties from "./constantVariables/difficulty";
 import Grid from "./Grid";
 import generateGrid from "./generateGrid";
-import squareLogic from "./functions/squareLogic";
 
 function Game() {
     const [difficulty, setDiff] = useState("0");
@@ -10,6 +9,8 @@ function Game() {
     const [customHeight, setCustomHeight] = useState(null);
     const [customMines, setCustomMines] = useState(null);
     const [dataArr, setData] = useState(generateGrid(9, 9, 10));
+    const [firstClicked, setClick] = useState(false);
+    const [currentMines, setMines] = useState(10);
 
     let isCustom = difficulty === "3" ? null : "none";
     let diffArray = difficulties;
@@ -17,7 +18,6 @@ function Game() {
     function handleSelect(event) {
         setDiff(event.target.value);
         const value = parseInt(event.target.value);
-        console.log(typeof difficulty);
         if (value < 3) {
             setData(
                 generateGrid(
@@ -27,30 +27,71 @@ function Game() {
                 )
             );
         }
+        setClick(false);
+        setMines(diffArray[value].mines);
     }
 
     function handleGen(event) {
         event.preventDefault();
         setData(generateGrid(customHeight, customWidth, customMines));
+        setClick(false);
+        setMines(customMines);
     }
 
     function handleSquare(e, data) {
-        setData(squareLogic(e, data, dataArr));
+        squareLogic(e, data);
+        setClick(true);
     }
 
     function reset(e) {
-        e.preventDefault();
+        if (e) {
+            e.preventDefault();
+        }
         if (difficulty === "0") {
             setData(generateGrid(9, 9, 10));
+            setMines(10);
         } else if (difficulty === "1") {
             setData(generateGrid(16, 16, 40));
+            setMines(40);
         } else if (difficulty === "2") {
             setData(generateGrid(16, 30, 99));
+            setMines(99);
         } else {
             if (customHeight && customWidth && customMines) {
                 setData(generateGrid(customHeight, customWidth, customMines));
+                setMines(customMines);
             }
         }
+        setClick(false);
+    }
+
+    function squareLogic(event, square) {
+        const rowInd = square.rowInd;
+        const colInd = square.colInd;
+        let finalArr = [...dataArr];
+        let updateSquare = true;
+
+        if (!firstClicked) {
+            while (finalArr[rowInd][colInd].value !== 0) {
+                finalArr = generateGrid(
+                    dataArr.length,
+                    dataArr[0].length,
+                    currentMines
+                );
+                updateSquare = false;
+            }
+        }
+
+        if (!square.isRevealed) {
+            if (event.type === "click") {
+                square.isRevealed = !square.isRevealed;
+            }
+        }
+
+        if (updateSquare) {
+            finalArr[rowInd][colInd] = square;
+        }
+        setData(finalArr);
     }
 
     return (
@@ -92,6 +133,7 @@ function Game() {
             </form>
             <br />
             <button onClick={reset}>Reset</button>
+            <h1>{currentMines}</h1>
             <Grid data={dataArr} function={handleSquare} />
         </div>
     );
