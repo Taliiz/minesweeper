@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import difficulties from "./constantVariables/difficulty";
 import Grid from "./Grid";
 import generateGrid from "./generateGrid";
+import clearZeros from "./functions/clearZeros";
 
 function Game() {
     const [difficulty, setDiff] = useState("0");
@@ -80,6 +81,8 @@ function Game() {
                 );
                 updateSquare = false;
             }
+            finalArr[rowInd][colInd].isRevealed = true;
+            finalArr = clearZeros(finalArr[rowInd][colInd], finalArr);
         }
 
         if (!square.isRevealed) {
