@@ -78,6 +78,7 @@ function generateGrid(height, width, mines) {
                     colInd: j,
                     isRevealed: false,
                     isMarked: false,
+                    cssClass: "notRevealed",
                 };
             }
         }
