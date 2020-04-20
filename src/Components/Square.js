@@ -7,8 +7,9 @@ function Square(props) {
         <button
             className={props.data.cssClass}
             onClick={(e) => props.function(e, data)}
+            onContextMenu={(e) => props.function(e, data)}
         >
-            {data.value}
+            <span style={data.style}>{data.display}</span>
         </button>
     );
 }

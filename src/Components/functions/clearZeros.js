@@ -1,11 +1,14 @@
 import surroundingSquares from "./surroundingSquares";
+import reveal from "./reveal";
 
 function clearZeros(square, data) {
     /* the clearlist contains the squares it needs to iterate over,
     the grid is just the 2D data array the grid is generated from */
     square.cssClass = "revealed";
+    square.style = null;
     let clearList = [square];
     let grid = data;
+    let count = 1;
 
     /* i use ri and ci as a shorthand for the row and column index
     of the current square it's iterating over,
@@ -27,22 +30,22 @@ function clearZeros(square, data) {
             its isRevealed value to true */
             if (!curSquare.isRevealed && curSquare.value === 0) {
                 clearList.push(grid[ri][ci]);
-                grid[ri][ci].isRevealed = true;
-                grid[ri][ci].cssClass = "revealed";
+                grid[ri][ci] = reveal(grid[ri][ci]);
+                count++;
 
                 /*  if it's not revealed and its value is 0
                 i add it to the clear list to be iterated
                 over at the next instance of the while loop */
             }
             if (!curSquare.isRevealed) {
-                grid[ri][ci].isRevealed = true;
-                grid[ri][ci].cssClass = "revealed";
+                grid[ri][ci] = reveal(grid[ri][ci]);
+                count++;
             }
         }
         //here i just remove it from the list ready to start over again
         clearList.shift();
     }
-    return grid;
+    return [grid, count];
 }
 
 export default clearZeros;

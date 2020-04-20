@@ -79,6 +79,8 @@ function generateGrid(height, width, mines) {
                     isRevealed: false,
                     isMarked: false,
                     cssClass: "notRevealed",
+                    style: { opacity: 0, fontWeight: "bold" },
+                    display: finalgrid[i][j].value,
                 };
             }
         }
